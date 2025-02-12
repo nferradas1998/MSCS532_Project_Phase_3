@@ -42,7 +42,7 @@ class CategoryList:
             current = current.next
         return False
 
-    def _delete_category_node(self, node):
+    def delete_category_node(self, node):
         if node.prev:
             node.prev.next = node.next
         if node.next:
@@ -60,27 +60,3 @@ class CategoryList:
             current = current.next
         return []
 
-
-# Sample Usage with 10 Products
-categories = CategoryList()
-
-category_options = ["Electronics", "Home Appliances", "Furniture"]
-
-for i in range(1, 11):
-    stock = Product.StockInfo(in_stock=100, reorder_level=10, reorder_quantity=50, inventory_status="In Stock", batch_number=f"B{i}")
-    price = Product.PriceInfo(cost=5.0 * i, retail_price=10.0 * i, discount=0.0, tax_rate=5.0)
-    attributes = Product.Attributes(size="Medium", weight=1.5, color="Blue", description=f"Product {i}")
-    digital = Product.Digital(product_images=[f"image{i}.jpg"], help_links=[f"help{i}.com"])
-    category = category_options[i % 3]  # Distribute products among the 3 categories
-    product = Product.Product(product_id=f"P00{i}", name=f"Product {i}", category=category, stock_info=stock, price_info=price, attributes=attributes, digital=digital)
-    categories.insert_product(product)
-
-# Retrieve products by category
-print("====================These Products are on the Electronics Category==================\n")
-print(categories.get_products_by_category("Electronics"))
-
-print("\n\n====================These Products are on the Home Appliances Category==================\n")
-print(categories.get_products_by_category("Home Appliances"))
-
-print("\n\n====================These Products are on the Furniture Category==================\n")
-print(categories.get_products_by_category("Furniture"))

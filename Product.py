@@ -8,9 +8,19 @@ class StockInfo:
     
     def update_stock(self, quantity: int):
         self.in_stock += quantity
-        self._update_inventory_status()
+        self.update_inventory_status()
+
+    def reduce_stock(self, quantity_bought: int):
+        self.in_stock -= quantity_bought
+        self.update_inventory_status()
+
+    def update_reorder_level(self, new_reorder_level: int):
+        self.reorder_level = new_reorder_level
+
+    def update_reorder_quantity(self, new_reorder_quantity: int):
+        self.reorder_quantity = new_reorder_quantity
     
-    def _update_inventory_status(self):
+    def update_inventory_status(self):
         if self.in_stock <= self.reorder_level:
             self.inventory_status = "Reorder Needed"
         else:
@@ -32,6 +42,9 @@ class PriceInfo:
         self.retail_price = retail_price
         self.discount = discount
         self.tax_rate = tax_rate
+
+    def update_cost(self, new_cost: float):
+        self.cost = new_cost
     
     def update_price(self, new_price: float):
         self.retail_price = new_price
@@ -39,6 +52,9 @@ class PriceInfo:
     def apply_discount(self, discount: float):
         self.discount = discount
         self.retail_price -= (self.retail_price * (discount / 100))
+
+    def set_tax_rate(self, tax_rate: float):
+        self.tax_rate = tax_rate
     
     def get_price_info(self):
         return {

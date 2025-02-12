@@ -170,29 +170,3 @@ class PriceBST:
                     stack.append(node.left)
                 stack.append(node.right)
         return results
-
-price_bst = PriceBST()
-
-for i in range(1, 11):
-    stock = Product.StockInfo(in_stock=100, reorder_level=10, reorder_quantity=50, inventory_status="In Stock", batch_number=f"B{i}")
-    price = Product.PriceInfo(cost=5.0 * i, retail_price=10.0 * i, discount=0.0, tax_rate=5.0)
-    attributes = Product.Attributes(size="Medium", weight=1.5, color="Blue", description=f"Product {i}")
-    digital = Product.Digital(product_images=[f"image{i}.jpg"], help_links=[f"help{i}.com"])
-    product = Product.Product(product_id=f"P00{i}", name=f"Product {i}", category="Electronics", stock_info=stock, price_info=price, attributes=attributes, digital=digital)
-    price_bst.insert(product)
-
-# Price-based searches
-print("=======This is the cheapest Product============\n")
-print("Minimum priced product:", price_bst.search_min_price())
-
-print("\n\n========This is the most expensive Product=========\n")
-print("Maximum priced product:", price_bst.search_max_price())
-
-print("\n\n=========These are products between 30 and 70 bucks===========\n")
-print("Products in price range 30 to 70:", price_bst.search_price_range(30, 70))
-
-print("\n\n=========These are products above 70 bucks===========\n")
-print("Products above price 70:", price_bst.search_above_price(70))
-
-print("\n\n=========These are products below 50 bucks===========\n")
-print("Products below price 50:", price_bst.search_below_price(50))
